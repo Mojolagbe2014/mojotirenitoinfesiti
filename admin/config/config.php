@@ -1,0 +1,12 @@
+<?php
+/*
+define(DB_HOST,"72.167.233.111");
+define(DB_USER,"traininvest123");
+define(DB_PASS,"Train1234!");
+define(DB_NAME,"traininvest123");
+*/
+define(DB_HOST,"107.180.44.131");
+define(DB_USER,"traininvest123");
+define(DB_PASS,"Train1234!");
+define(DB_NAME,"traininvest123");
+?>

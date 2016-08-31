@@ -42,7 +42,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand " href="index-2.html"><img src="images/logo.jpg" alt="logo"></a>
+                    <a class="navbar-brand " href="index.html"><img src="images/logo.jpg" alt="logo"></a>
                 </div>
 
                 <div class="collapse navbar-collapse navbar-right">
@@ -960,7 +960,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
               <div class="embed-responsive embed-responsive-16by9">
 
-                      <iframe width="854" height="480" src="https://www.youtube.com/embed/gNslMvvDznw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                      <iframe width="854" height="480" src="https://www.youtube.com/embed/gNslMvvDznw?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
                     </div>
             </div>
                 <div class="col-sm-12 col-lg-6 col-md-6">
@@ -1148,7 +1148,7 @@
                 <p class="text-center wow fadeInDown">You Can Email Us <br>Here ! </p>
             </div>
             <div class="embed-responsive embed-responsive-16by9">
-                       <iframe width="560" height="315" src="https://www.youtube.com/embed/bD9KI29lXwc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                       <iframe width="560" height="315" src="https://www.youtube.com/embed/bD9KI29lXwc?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
                     </div>
 
         </div>
@@ -1174,7 +1174,7 @@
                     <div class="col-sm-12 col-lg-8 col-md-8">
 <div class="contact-cont">
 
-    <form class="well form-horizontal" action="http://train2invest.com/sendmail.php" method="post"  id="contactus">
+    <form class="well form-horizontal" action="sendmail.php" method="post"  id="contactus">
 
 <fieldset>
 
@@ -1294,7 +1294,7 @@
     <div class="input-group">
       <img src="http://www.train2invest.com/captcha.php" id="captcha"><br>
       <!-- CHANGE TEXT LINK -->
-      <a href="#" onclick="document.getElementById('captcha').src='captchad41d.jpg?'+Math.random(); document.getElementById('captcha-form').focus();" id="change-image">Not readable? Change text.</a><br><br>
+      <a href="#" onclick="document.getElementById('captcha').src='captcha.php?'+Math.random(); document.getElementById('captcha-form').focus();" id="change-image">Not readable? Change text.</a><br><br>
   </div>
   </div>
 </div>
@@ -1312,7 +1312,42 @@
 <!-- Success message -->
 <!-- <div class="alert alert-success" role="alert" id="success_message">
 </div> -->
-  
+  <?php
+        if(isset($_GET['msg']))
+        {
+          ?>
+          <div class="alert alert-success" role="alert" id="success_message2">
+          <?php
+          if($_GET['msg'] == '1')
+          {
+            echo "Failed! Please fill the form</div>";
+          }
+          if($_GET['msg'] == '2')
+          {
+            ?>
+          <div class="alert alert-success" role="alert" id="success_message2">
+          <?php
+            echo "Invalid captcha</div>";
+          }
+          if($_GET['msg'] == '3')
+          {
+            ?>
+          <div class="alert alert-success" role="alert" id="success_message2">
+          <?php
+            echo "Your Request has been sent.</div>";
+          }
+          if($_GET['msg'] == '4')
+          {
+            ?>
+          <div class="alert alert-success" role="alert" id="success_message2">
+          <?php
+            echo "Cannot Send the request</div>";
+          }
+          
+        }
+        else{}
+      ?>
+
 
 <!-- Button -->
 <div class="form-group">
