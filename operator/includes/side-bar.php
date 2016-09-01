@@ -34,7 +34,7 @@
                     </li>
                     <li> <a href="#"><i class="fa fa-bell-o fa-2x"></i> Breaking News<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="manage-events">Manage News</a> </li>
+                            <li> <a href="manage-news">Manage News</a> </li>
                         </ul>
                     </li>
                     <li> <a href="#"><i class="fa fa-quote-left fa-2x"></i> Testimonials Manager<span class="fa arrow"></span></a>
