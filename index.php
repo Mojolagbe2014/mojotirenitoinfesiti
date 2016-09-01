@@ -103,27 +103,7 @@ require('includes/page-properties.php');
 
     <script src="js/jquery.js"></script>
     <script src="js/equalHeights.js"></script>
-
-    <script >
-    $(document).ready(function(){
-        $("div.toggle-content").css('display', 'none').first().show();
-        $("a.toggle").on("click",function(e){
-            $("div.toggle-content").hide();
-            menuContentId = $(this).attr('data-content');
-            $('#'+menuContentId).slideToggle('slow');
-        });
-
-        $("a.toggle-read").on("click",function(e) {
-            e.preventDefault();
-            if($("div.toggle-read-more").css("display") == "none")
-                $("div.toggle-read-more").slideDown(500).show();
-            else
-                $("div.toggle-read-more").fadeOut(500).hide();
-          });
-    });
-
-
-    </script>
+    <script src="js/common-handler.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="js/owl.carousel.min.js"></script>
