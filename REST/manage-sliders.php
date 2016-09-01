@@ -17,7 +17,7 @@ if(!isset($_SESSION['ITCLoggedInAdmin']) || !isset($_SESSION["ITCadminEmail"])){
 else{
     if(filter_input(INPUT_POST, "fetchSliders") != NULL){
         $requestData= $_REQUEST;
-        $columns = array( 0 =>'id', 1 =>'id', 2 =>'status', 3 => 'image',  4 => 'orders');
+        $columns = array( 0 =>'id', 1 =>'id', 2 =>'status', 3 =>'title', 4 =>'content', 5 => 'image',  6 => 'orders');
 
         // getting total number records without any search
         $query = $dbObj->query("SELECT * FROM slider ");
@@ -26,7 +26,8 @@ else{
 
         $sql = "SELECT * FROM slider WHERE 1=1 "; //id, name, short_name, category, start_date, code, description, media, amount, date_registered
         if(!empty($requestData['search']['value'])) {   // if there is a search parameter, $requestData['search']['value'] contains search parameter
-                $sql.=" AND ( image LIKE '%".$requestData['search']['value']."%' "; 
+                $sql.=" AND ( title LIKE '%".$requestData['search']['value']."%' "; 
+                $sql.=" OR content LIKE '%".$requestData['search']['value']."%' ";
                 $sql.=" OR orders LIKE '%".$requestData['search']['value']."%' ) ";
         }
         $query = $dbObj->query($sql);
@@ -105,12 +106,12 @@ else{
     }
     
     if(filter_input(INPUT_POST, "updateThisSlider") != NULL){
-        $postVars = array('id', 'image','orders');  // Form fields names
+        $postVars = array('id', 'title', 'content', 'image','orders');  // Form fields names
         $oldImage = $_REQUEST['oldImage'];
         //Validate the POST variables and add up to error message if empty
         foreach ($postVars as $postVar){
             switch($postVar){
-                case 'image':   $newImage = basename($_FILES["image"]["name"]) ? rand(100000, 1000000)."_".  strtolower(str_replace(" ", "_", "slider")).".".pathinfo(basename($_FILES["image"]["name"]),PATHINFO_EXTENSION): ""; 
+                case 'image':   $newImage = basename($_FILES["image"]["name"]) ? rand(100000, 1000000)."_". StringManipulator::trimStringToFullWord(30, StringManipulator::slugify(filter_input(INPUT_POST, 'title'))).".".pathinfo(basename($_FILES["image"]["name"]),PATHINFO_EXTENSION): ""; 
                                 $sliderObj->$postVar = $newImage;
                                 if($sliderObj->$postVar == "") { $sliderObj->$postVar = $oldImage;}
                                 $sliderImageFil = $newImage;

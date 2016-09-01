@@ -47,6 +47,8 @@ $errorArr = array(); //Array of errors
                                             <tr>
                                                 <th><input type="checkbox" class="select-checkbox" id="multi-action-box" /></th>
                                                 <th>ID</th>
+                                                <th>Slider Title</th>
+                                                <th>Content Body</th>
                                                 <th>Actions &nbsp; 
                                                     <button  class="btn btn-success btn-sm multi-activate-slider multi-select" title="Change Status"><i class="btn-icon-only icon-check"> </i></button> 
                                                     <button class="btn btn-danger btn-sm multi-delete-slider multi-select" title="Delete Selected"><i class="btn-icon-only icon-trash"> </i></button>
@@ -66,6 +68,20 @@ $errorArr = array(); //Array of errors
                             </div>
                             <div class="panel-body">
                                 <form role="form" id="UpdateSlider" name="UpdateSlider" action="../REST/manage-sliders.php" method="POST" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label class="control-label" for="title">Slider Title:</label>
+                                        <div class="controls">
+                                            <input data-title="" type="text" placeholder=" Title" id="title" name="title" data-original-title="" class="form-control">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label" for="content">Content:</label>
+                                        <div class="controls">
+                                            <textarea id="content" placeholder="Content" name="content" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="form-group">
                                         <label class="control-label" for="image">Image:</label>
                                         <div class="controls">

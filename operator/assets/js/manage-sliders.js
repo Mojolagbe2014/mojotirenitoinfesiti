@@ -72,13 +72,13 @@ $(document).ready(function(){
     
     $(document).on('click', '.activate-slider', function() {
         currentStatus = 'Activate'; if(parseInt($(this).attr('data-status')) === 1) currentStatus = "De-activate";
-        if(confirm("Are you sure you want to "+currentStatus+" this slider? Slider Name: '"+$(this).attr('data-image')+"'")) activateSlider($(this).attr('data-id'),$(this).attr('data-status'));
+        if(confirm("Are you sure you want to "+currentStatus+" this slider? Slider Name: '"+$(this).attr('data-title')+"'")) activateSlider($(this).attr('data-id'),$(this).attr('data-status'));
     });
     $(document).on('click', '.delete-slider', function() {
-        if(confirm("Are you sure you want to delete this slider ["+$(this).attr('data-image')+"]? Slider image ['"+$(this).attr('data-image')+"'] will be deleted too.")) deleteSlider($(this).attr('data-id'),$(this).attr('data-image'));
+        if(confirm("Are you sure you want to delete this slider ["+$(this).attr('data-title')+"]? Slider image ['"+$(this).attr('data-image')+"'] will be deleted too.")) deleteSlider($(this).attr('data-id'),$(this).attr('data-image'));
     });
     $(document).on('click', '.edit-slider', function() {
-        if(confirm("Are you sure you want to edit this slider ["+$(this).attr('data-image')+"] details?")) editSlider($(this).attr('data-id'), $(this).attr('data-image'), $(this).attr('data-orders'));
+        if(confirm("Are you sure you want to edit this slider ["+$(this).attr('data-title')+"] details?")) editSlider($(this).attr('data-id'), $(this).attr('data-title'), $(this).find('span#JQDTcontentholder').html(), $(this).attr('data-image'), $(this).attr('data-orders'));
     });
     
     function deleteSlider(id, image){
@@ -158,8 +158,8 @@ $(document).ready(function(){
         });
     }
     
-    function editSlider(id, image, orders){//,
-        var formVar = {id:id, image:image, orders:orders};
+    function editSlider(id, title, content, image, orders){//,
+        var formVar = {id:id, title:title, content:content, image:image, orders:orders};
         $.each(formVar, function(key, value) { 
             if(key == 'image') { $('form #oldImage').val(value); $('form #oldImageComment').text(value).css('color','red');$('form #oldImageSource').html('<img src="../media/slider/'+value+'" style="width:80px;height:60px;" />');} 
             else $('form #'+key).val(value);  

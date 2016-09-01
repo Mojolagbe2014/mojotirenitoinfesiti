@@ -7,6 +7,8 @@ class Slider implements ContentManipulator{
     //class properties/data
     private $id;
     private $image;
+    private $title;
+    private $content;
     private $orders;
     private $status = 1;
     
@@ -35,9 +37,9 @@ class Slider implements ContentManipulator{
      * @return JSON JSON encoded string/result
      */
     public function add(){
-        $sql = "INSERT INTO ".self::$tableName." (image, orders, status) "
-                ."VALUES ('{$this->image}','{$this->orders}','{$this->status}')";
-        if($this->notEmpty($this->image,$this->orders,$this->status)){
+        $sql = "INSERT INTO ".self::$tableName." (title, content, image, orders, status) "
+                ."VALUES ('{$this->title}','{$this->content}','{$this->image}','{$this->orders}','{$this->status}')";
+        if($this->notEmpty($this->title,$this->content,$this->image,$this->orders)){
             $result = self::$dbObj->query($sql);
             if($result !== false){ $json = array("status" => 1, "msg" => "Done, slider successfully added!"); }
             else{ $json = array("status" => 2, "msg" => "Error adding slider! ".  mysqli_error(self::$dbObj->connection)); }
@@ -79,7 +81,7 @@ class Slider implements ContentManipulator{
         $result =array(); 
         if(count($data)>0){
             foreach($data as $r){
-                $result[] = array("id" => $r['id'], "image" =>  utf8_encode($r['image']), 'orders' =>  utf8_encode($r['orders']), "status" =>  utf8_encode($r['status']));
+                $result[] = array("id" => $r['id'], "title" =>  utf8_encode($r['title']), "content" =>  utf8_encode($r['content']), "image" =>  utf8_encode($r['image']), 'orders' =>  utf8_encode($r['orders']), "status" =>  utf8_encode($r['status']));
             }
             $json = array("status" => 1, "info" => $result);
         } else{ $json = array("status" => 2, "msg" => "Necessary parameters not set. Or empty result. ".mysqli_error(self::$dbObj->connection)); }
@@ -119,7 +121,7 @@ class Slider implements ContentManipulator{
                 $fetSliderStat = 'icon-check-empty'; $fetSliderRolCol = 'btn-warning'; $fetSliderRolTit = "Activate Slider";
                 if($r['status'] == 1){  $fetSliderStat = 'icon-check'; $fetSliderRolCol = 'btn-success'; $fetSliderRolTit = "De-activate Slider";}
                 $multiActionBox = '<input type="checkbox" class="multi-action-box" data-id="'.$r['id'].'" data-image="'.$r['image'].'" data-orders="'.$r['orders'].'"  data-status="'.$r['status'].'" />';
-                $result[] = array(utf8_encode($multiActionBox), $r['id'], utf8_encode(' <button data-id="'.$r['id'].'" data-image="'.$r['image'].'" data-orders="'.$r['orders'].'" class="btn btn-danger btn-sm delete-slider" title="Delete"><i class="btn-icon-only icon-trash"> </i></button> <button data-id="'.$r['id'].'" data-image="'.$r['image'].'" data-orders="'.$r['orders'].'" data-status="'.$r['status'].'" class="btn btn-info btn-sm edit-slider"  title="Edit"><i class="btn-icon-only icon-pencil"> </i> <span id="JQDTbioholder" data-bio ="" class="hidden"></span> </button> <button data-id="'.$r['id'].'" data-image="'.$r['image'].'" data-status="'.$r['status'].'"  class="btn '.$fetSliderRolCol.' btn-sm activate-slider"  title="'.$fetSliderRolTit.'"><i class="btn-icon-only '.$fetSliderStat.'"> </i></button>'), utf8_encode('<img src="../media/slider/'.utf8_encode($r['image']).'" style="width:60px; height:50px;" alt="Pix">'), StringManipulator::trimStringToFullWord(40, utf8_encode(stripslashes(strip_tags($r['orders'])))));//
+                $result[] = array(utf8_encode($multiActionBox), $r['id'], utf8_encode(' <button data-id="'.$r['id'].'" data-title="'.$r['title'].'" data-image="'.$r['image'].'" data-orders="'.$r['orders'].'" class="btn btn-danger btn-sm delete-slider" title="Delete"><i class="btn-icon-only icon-trash"> </i></button> <button data-id="'.$r['id'].'" data-title="'.$r['title'].'" data-image="'.$r['image'].'" data-orders="'.$r['orders'].'" data-status="'.$r['status'].'" class="btn btn-info btn-sm edit-slider"  title="Edit"><i class="btn-icon-only icon-pencil"> </i> <span id="JQDTcontentholder" data-content="" class="hidden">'.$r['content'].'</span> </button> <button data-id="'.$r['id'].'" data-title="'.$r['title'].'" data-image="'.$r['image'].'" data-status="'.$r['status'].'"  class="btn '.$fetSliderRolCol.' btn-sm activate-slider"  title="'.$fetSliderRolTit.'"><i class="btn-icon-only '.$fetSliderStat.'"> </i></button>'), StringManipulator::trimStringToFullWord(80, utf8_encode(stripslashes(strip_tags($r['title'])))), StringManipulator::trimStringToFullWord(250, utf8_encode(stripslashes(strip_tags($r['content'])))), utf8_encode('<img src="../media/slider/'.utf8_encode($r['image']).'" style="width:60px; height:50px;" alt="Pix">'), StringManipulator::trimStringToFullWord(40, utf8_encode(stripslashes(strip_tags($r['orders'])))));//
             }
             $json = array("status" => 1,"draw" => intval($draw), "recordsTotal"    => intval($totalData), "recordsFiltered" => intval($totalFiltered), "data" => $result);
         } 
@@ -133,7 +135,7 @@ class Slider implements ContentManipulator{
      * @return JSON JSON encoded success or failure message
      */
     public function update() {
-        $sql = "UPDATE ".self::$tableName." SET image = '{$this->image}', orders = '{$this->orders}' WHERE id = $this->id ";
+        $sql = "UPDATE ".self::$tableName." SET title = '{$this->title}', content = '{$this->content}', image = '{$this->image}', orders = '{$this->orders}' WHERE id = $this->id ";
         if(!empty($this->id)){
             $result = self::$dbObj->query($sql);
             if($result !== false){ $json = array("status" => 1, "msg" => "Done, slider successfully update!"); }

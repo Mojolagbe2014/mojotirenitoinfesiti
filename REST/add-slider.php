@@ -15,11 +15,11 @@ if(!isset($_SESSION['ITCLoggedInAdmin']) || !isset($_SESSION["ITCadminEmail"])){
 }
 else{
     if(filter_input(INPUT_POST, "addNewSlider") != NULL){
-        $postVars = array('image','orders'); // Form fields names
+        $postVars = array('title', 'content', 'image', 'orders'); // Form fields names
         //Validate the POST variables and add up to error message if empty
         foreach ($postVars as $postVar){
             switch($postVar){
-                case 'image':   $sliderObj->$postVar = basename($_FILES["image"]["name"]) ? rand(100000, 1000000)."_".  strtolower(str_replace(" ", "_", "slider")).".".pathinfo(basename($_FILES["image"]["name"]),PATHINFO_EXTENSION): ""; 
+                case 'image':   $sliderObj->$postVar = basename($_FILES["image"]["name"]) ? rand(100000, 1000000)."_".  StringManipulator::trimStringToFullWord(30, StringManipulator::slugify(filter_input(INPUT_POST, 'title'))).".".pathinfo(basename($_FILES["image"]["name"]),PATHINFO_EXTENSION): ""; 
                                 $sliderImgFil = $sliderObj->$postVar;
                                 if($sliderObj->$postVar == "") {array_push ($errorArr, "Please enter $postVar ");}
                                 break;

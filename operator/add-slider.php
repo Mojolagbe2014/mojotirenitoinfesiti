@@ -40,6 +40,20 @@ $errorArr = array(); //Array of errors
                             <div class="panel-body">
                                 <form role="form" id="CreateSlider" name="CreateSlider" action="../REST/add-slider.php" enctype="multipart/form-data">
                                     <div class="form-group">
+                                        <label class="control-label" for="title">Slider Title:</label>
+                                        <div class="controls">
+                                            <input data-title="" type="text" placeholder=" Title" id="title" name="title" data-original-title="" class="form-control">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="control-label" for="content">Content:</label>
+                                        <div class="controls">
+                                            <textarea id="content" placeholder="Content" name="content" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
                                         <label class="control-label" for="image">Image:</label>
                                         <div class="controls">
                                             <input data-title="slider image" type="file" placeholder="slider image" id="image" name="image" data-original-title="Slider Image" class="form-control" required="required">
