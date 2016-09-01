@@ -80,7 +80,7 @@ class Testimonial implements ContentManipulator{
         $result =array(); 
         if(count($data)>0){
             foreach($data as $r){ 
-                $r['image'] = $r['image'] =="" ? "noimage.jpg" : $r['image'];
+                $r['image'] = $r['image'] =="" ? "noimage.png" : $r['image'];
                 $multiActionBox = '<input type="checkbox" class="multi-action-box" data-id="'.$r['id'].'" data-image="'.$r['image'].'" />';
                 $result[] = array(utf8_encode($multiActionBox), $r['id'], utf8_encode($r['content']), utf8_encode($r['author']), utf8_encode('<img src="../media/testimonial/'.utf8_encode($r['image']).'" width="60" height="50" alt="Pix">'), utf8_encode(' <div style="white-space:nowrap"><button data-id="'.$r['id'].'"  data-author="'.$r['author'].'"  data-image="'.$r['image'].'" class="btn btn-info btn-sm edit-testimonial"  title="Edit"><i class="btn-icon-only icon-pencil"> </i> <span class="hidden">'.$r['content'].'</span> </button> <button data-image="'.$r['image'].'" data-id="'.$r['id'].'" class="btn btn-danger btn-sm delete-testimonial" title="Delete"><i class="btn-icon-only icon-trash"> </i><span class="hidden">'.$r['content'].'</span></button></div>'));
             }
