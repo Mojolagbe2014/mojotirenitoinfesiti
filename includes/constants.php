@@ -1,7 +1,7 @@
 <?php
 /** Database Connection Strings */
 define("SITE_URL","http://localhost/mojotirenitoinfesiti/");
-define("SITE_URL1","http://localhost/");
+define("SITE_URL1","http://localhost");
 define("DB_NAME","traintoinvest"); //iadet910_iadetmobile
 define("DB_USER","root");//iadet910_mobile
 define("DB_PASSWORD","");//@Kaiste&NstProduct2015

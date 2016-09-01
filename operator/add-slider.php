@@ -70,7 +70,7 @@ $errorArr = array(); //Array of errors
                                     <div class="form-group">
                                         <div class="controls">
                                             <input type="hidden" name="addNewSlider" id="addNewSlider" value="addNewSlider"/>
-                                            <button type="submit" name="addSlider" id="addSlider" class="btn btn-danger">Add Member</button> &nbsp; &nbsp;
+                                            <button type="submit" name="addSlider" id="addSlider" class="btn btn-danger">Add Slider</button> &nbsp; &nbsp;
                                             <button type="reset" class="btn btn-info">Reset Form</button>
                                         </div>
                                     </div>

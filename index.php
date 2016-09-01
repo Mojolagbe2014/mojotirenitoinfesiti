@@ -1,12 +1,27 @@
+<?php 
+session_start();
+define("CONST_FILE_PATH", "includes/constants.php");
+define("CURRENT_PAGE", "home");
+require('classes/WebPage.php'); //Set up page as a web page
+$thisPage = new WebPage(); //Create new instance of webPage class
+
+$dbObj = new Database();//Instantiate database
+$thisPage->dbObj = $dbObj;
+$newsObj = new News($dbObj);
+$sliderObj = new Slider($dbObj);
+$testimonialObj = new Testimonial($dbObj);
+$brochureObj = new CourseBrochure($dbObj);
+$videoObj = new Video($dbObj);
+$settingObj = new Setting($dbObj);
+
+include('includes/other-settings.php');
+require('includes/page-properties.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Train2Invest</title>
-  <!-- core CSS -->
+    <?php include('includes/meta-tags.php'); ?>
+    <!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
@@ -25,173 +40,31 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-
-
-
+    <link href="<?php echo SITE_URL; ?>sweet-alert/sweetalert.css" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo SITE_URL; ?>sweet-alert/twitter.css" rel="stylesheet" type="text/css"/>
 </head><!--/head-->
 
 <body id="home" class="homepage">
-
-    <header id="header">
-        <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
-            <div class="container navbar-header">
-                <div class="navbar-header" style="float:left !important;">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand " href="index.html"><img src="images/logo.jpg" alt="logo"></a>
-                </div>
-
-                <div class="collapse navbar-collapse navbar-right">
-                    <ul class="nav navbar-nav">
-                        <li class="scroll active"><a href="#home">Home</a></li>
-                        
-                        <li class="scroll"><a href="#about">About Us</a></li>
-                        <li class="scroll"><a href="#portfolio">The Program</a></li>
-                        <li class="scroll"><a href="#testimonial">Testimonals</a></li> 
-                        <li class="scroll"><a href="https://www.facebook.com/Train2Invest/">Blog</a></li>
-                        <li class="scroll"><a href="#get-in-touch">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div><!--/.container-->
-        </nav><!--/nav-->
-    </header><!--/header-->
-
-    <section id="main-slider">
-        <div class="owl-carousel">
-          <div class="item">
-
-             <div class="slider-inner">
-                 <div class="container">
-                   <div class="support item image-fam"  style="background-image: url(images/slider/bg5.jpg);">
-                   </div>
-
-                     <div class="row">
-                       <div class="col-sm-12 col-lg-12 col-md-12 slider-content ">
-                           <div class="carousel-content">
-                               <h2>The Power to Prosper!</h2>
-                               <p class="slider-text-content">We want you to share more than your eye color to the next generation.</p>
-                               <p class="slider-text-content">Think about it: What is the more important thing that you can pass on to the next generation?</p>
-                               <h2 class="h2-no-margin h2-small-text">WEALTH MANAGEMENT</h2>
-
-                           </div>
-                       </div>
-                     </div>
-                 </div>
-             </div>
-          </div><!--/.item-->
-            <div class="item">
-
-               <div class="slider-inner">
-                   <div class="container">
-                     <div class="support item"  style="background-image: url(images/slider/bg3.jpg);">
-                     </div>
-
-                       <div class="row">
-                         <div class="col-sm-12 col-lg-12 col-md-12 slider-content ">
-                             <div class="carousel-content">
-                                 <h2>You are not alone</h2>
-                                 <h2 class="h2-no-margin">We have a team to support you!</h2>
-                                 <h2 class="h2-no-margin">You are Family!</h2>
-                             </div>
-                         </div>
-                       </div>
-                   </div>
-               </div>
-            </div><!--/.item-->
-
-            <div class="item">
-
-               <div class="slider-inner">
-                   <div class="container">
-                     <div class="support item"  style="background-image: url(images/slider/bg4.jpg);">
-                     </div>
-
-                       <div class="row">
-                         <div class="col-sm-12 col-lg-12 col-md-12 slider-content ">
-                             <div class="carousel-content">
-                                <h1 style="color:#FFC000;line-height:20%;">THE SEASONS OF LIFE</h1>
-                                 <h2 class="h2-no-margin h2-red" style="line-height:10%;">TIME</h2>
-								 <h2 class="h2-no-margin" style="color:#0070C0;line-height:10%;"> is the CURRENCY of life</h2> 
-								 <h2 class="h2-no-margin" style="color:#0070C0;line-height:10%;">&</h2>
-								 <h2 class="h2-no-margin" style="color:#0070C0;line-height:10%;">PROCRASTINATION</h2>
-								 <h2 class="h2-no-margin" style="color:#0070C0;line-height:10%;">is the thief of<strong class="h2-red" style="font-size:27px;font-weight:600;"> TIME</strong>
-								 </h2>
-								 
-							</div>
-                                 
-                             </div>
-                         </div>
-                       </div>
-                   </div>
-               </div>
-            
-            <div class="item">
-
-               <div class="slider-inner">
-                   <div class="container">
-                     <div class="support item"  style="background-image: url(images/slider/bg1.jpg);">
-                     </div>
-
-                       <div class="row">
-                         <div class="col-sm-12 col-lg-12 col-md-12 slider-content ">
-                             <div class="carousel-content">
-                                 <h2>"A GOODMAN LEAVES AN</h2>
-                                 <h2 class="h2-no-margin">INHERITANCE TO HIS CHILDREN's</h2>
-                                 <h2 class="h2-no-margin">CHILDREN"</h2>
-                             </div>
-                         </div>
-                       </div>
-                   </div>
-               </div>
-            </div><!--/.item-->
-        </div><!--/.owl-carousel-->
-    </section><!--/#main-slider-->
+    <?php include('includes/header.php'); ?>
+    
+    <?php include('includes/homepage-slider.php'); ?>
 
     <section id="cta" class="wow fadeIn">
       <!-- Page Content -->
-      <div class="container">
-
-          <!-- Marketing Icons Section -->
-          <div class="row">
-              <div class="col-lg-12">
-                  <h1 class="page-header" style="color:#4866CF;">
-                      Welcome
-                  </h1>
-              </div>
-              <div class="col-md-12">
-                  <div class="panel panel-default">
-                      <div class="panel-body min_height">
-                          <div class="col-lg-6">
-                            <strong class="strong-logo">TRAIN<strong class="h2-red">2</strong>INVEST</strong><span> is attempting to transform Canadian families in the arena of wealth building and more importantly wealth management! Think about this:</span>
-                            <h3>WHO TAUGHT US WEALTH MANAGEMENT?<h3>
-                              <span>Did we learn about managing wealth:</span>
-                              <ul>
-                                <li><a href="#">From School?</a></li>
-                                <li><a href="#">From Parents?</a></li>
-                                <li><a href="#">From Friends?</a></li>
-                                <li><a href="#">From Books/Seminars?</a></li>
-                                <li><a href="#">From Universities/Colleges?</a></li>
-                              </ul>
-                              <strong>Answer: </strong><span>Usually through OSMOSIS - from a combination of the above <strong>OR</strong> more likely through <strong>TRIAL & ERROR.</strong></span>
-                          </div>
-                          <div class="col-lg-6">
-                            <strong>WHAT IF:</strong><br><span> You had a personal TEACHER, TRAINER and a COACH that taught you and continues to mentor you on how to manage your savings(incl. PRSP/TFSA etc) so that has your money was working for you!</span><br><br>
-                            <span>OK...too old...don't know math...too busy. These are ALL excuses!</span><br><br>
-                            <span>The <strong class="strong-logo">TRAIN<strong class="h2-red">2</strong>INVEST</strong> strategy ensures that a person with Grade 12 education or someone with 10 years of working experience(street smarts) is able not only to comprehend investment concepts but who can execute them within 6 months!</span><br><br>
-                            <span>How can we be sure?? We have thousands of clients just like you!</span><br>
-                            <a href="#testimonial">Check out our testimonials!</a>
-
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              </div>
-          <!-- /.row -->
-  </div>
+        <div class="container">
+            <!-- Welcome Section -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header" style="color:#4866CF;"> Welcome </h1>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body min_height"> <?php echo Setting::getValue($dbObj, 'WELCOME_MESSAGE') ? Setting::getValue($dbObj, 'WELCOME_MESSAGE') : ''; ?> </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
     </section><!--/#cta-->
 
     <section id="cta2">
@@ -208,299 +81,43 @@
     <section id="portfolio">
         <div class="container row" style="margin: 0px auto;">
             <div class="section-header">
-                <h2 class="section-title text-center wow fadeInDown">THE <strong class="strong-logo bigger-size">TRAIN<strong class="h2-red bigger-size">2</strong>INVEST</strong> PRGRAM</h2>
-                <div class="col-md-12 col-lg-12 col-sm-12 text-center"><strong>TEACH, TRAIN, COACH</strong></div><br><br>
-                <div class="col-md-12 col-lg-12 col-sm-12">
-                  <strong class="strong-logo">TRAIN<strong class="h2-red">2</strong>INVEST</strong><span> offers a COMPLETE SOLUTION in taking a novice investor to achieve a skill set that empowers them to trade with CONFIDENCE & CONSISTENCY. Deliveringa step-by-step learning process that breaks down complex subject matter into manageable, bite-sized piece of information.</span>
-                </div><br><br><br>
-                <div class="col-md-12 col-lg-12 col-sm-12">
-                  <strong class="strong-logo">TRAIN<strong class="h2-red">2</strong>INVEST</strong><span> is dedicated to helping investors excel at managing their own portfolios through a simple but complete, step-by-step education process. Our learning environment focuses on the developement of good strategies supported by solid, disciplined decision making criteria producing confident and capable investors.</span>
-                </div><br><br><br><br>
-                <div class="col-md-12 col-lg-12 col-sm-12">
-                  <strong class="strong-logo">TRAIN<strong class="h2-red">2</strong>INVEST</strong><span> teaches,train & coaches novice individuals/families and 'inconsistent' experienced investors| to significantly reduce risk through knowledge (theory & practical hands-on lectures), a structured investing/trading methodology(a trading plan), the use of powerful tools (charting software & data feeds), and support groups (mentor & coaches). It is a comprehensive approach to managing wealth productivity where synergies come from careful planning and the utilization of existing investment reserves in purposeful ways for the current and next generation(s).</span>
-                </div>
-            </div><br><br><br><br><br>
-
+                <?php echo Setting::getValue($dbObj, 'THE_PROGRAM') ? Setting::getValue($dbObj, 'THE_PROGRAM') : ''; ?>
+            </div>
             <div class="text-center">
-
                 <ul class="portfolio-filter">
-                    <!--<li><a class="active" href="#" data-filter="*">Basic Requirements</a></li>-->
-                    <li><a href="#"  class="active toggle-requirements">BASIC REQUIREMENTS</a></li>
-                    <li><a href="#" class="toggle-phases">PROGRAM PHASES</a></li>
-                    <li><a href="#" class="toggle-outline">OUTLINE</a></li>
+                    <?php 
+                    $num = 1; $addStyle = '';
+                    foreach ($settingObj->fetchRaw("*", " name LIKE 'THE_PROGRAM_MENU%' ", " name ASC ") as $setting) {
+                        $settingData = array('name' => 'name', 'value' => 'value');
+                        foreach ($settingData as $key => $value){
+                            switch ($key) {  default     :  $settingObj->$key = $setting[$value]; break; }
+                        }
+                        $addStyle = $num == 1 ? 'active ' : ''; 
+                        $secondPart = @explode(" ", trim(stripcslashes(strtolower(strip_tags($settingObj->value)))))[1] ? explode(" ", trim(stripcslashes(strtolower(strip_tags($settingObj->value)))))[1] : trim(stripcslashes(strtolower(strip_tags($settingObj->value))));
+                    ?>
+                    
+                    <li><a href="#"  class="<?php echo $addStyle; ?>toggle-<?php echo $secondPart;?>"><?php echo trim(stripcslashes(strip_tags($settingObj->value))); ?></a></li>
+                    <?php $num++; } ?>
                 </ul><!--/#portfolio-filter-->
             </div>
 
             <div class="course-details">
-              <div class="container basic-requirements">
-
-                  <div class="row">
-
-                      <div class="col-md-6 col-lg-6 col-sm-12">
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4>Basic Requirements</h4>
-                              </div>
-                              <div class="panel-body" style="min-height:405px;">
-                                  <ul>
-
-
-                                    <h4>Core competencies achieved by our students include:</h4>
-                                    <li><a>Capital preservation</a></li>
-                                    <li><a>Risk management</a></li>
-                                    <li><a>Money managment</a></li>
-                                    <li><a>Strategic wealth management</a></li>
-                                    <li><a>Understanding trading psychology</a></li>
-                                    <li><a>Fundamental analysis</a></li>
-                                    <li><a>Technical Analysis</a></li>
-                                    <li><a>Understanding the impact of globalization and trading mechanics</a></li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-6 col-lg-6 col-sm-12">
-                          <div class="panel panel-default">
-                              <div class="panel-heading">
-                                  <h4>Synopsis</h4>
-                              </div>
-                              <div class="panel-body" style="min-height:405px;">
-                                  <p>In its simplest form, TRAIN2INVEST teaches individuals to buy quality blue-chip stocks and generate small, consistent returns in reasonable time horizons. (PRINCIPLE: You never lose taking a profit – however small!).</p>
-                                  <ul>
-                                    <h4>The Process ANSWERS the following questions:</h4>
-                                    <li><a>What quality stocks to buy?</a></li>
-                                    <li><a>When is the best time to buy?</a></li>
-                                    <li><a>When to sell?</a></li>
-                                    <li><a>How to control your emotions?</a></li>
-                                    <li><a>How to mitigate losses?</a></li>
-                                  </ul>
-                                  <p>The results of a well thought out strategy following these principles means that our students can create ongoing portfolio growth without taking unreasonable risks.</p>
-                              </div>
-                          </div>
-                      </div>
-                      </div>
+                <?php 
+                $nums = 1; $addStyles = '';
+                foreach ($settingObj->fetchRaw("*", " name LIKE 'THE_PROGRAM_MENU%' ", " name ASC ") as $setting) {
+                        $settingData = array('name' => 'name', 'value' => 'value');
+                        foreach ($settingData as $key => $value){
+                            switch ($key) {  default     :  $settingObj->$key = $setting[$value]; break; }
+                        }
+                        $secondPart = @explode(" ", trim(stripcslashes(strtolower(strip_tags($settingObj->value)))))[1] ? explode(" ", trim(stripcslashes(strtolower(strip_tags($settingObj->value)))))[1] : trim(stripcslashes(strtolower(strip_tags($settingObj->value))));
+                        $newValue = $nums==1 ? StringManipulator::slugify(strip_tags($settingObj->value)) : $secondPart."-of-course";
+                ?>
+                <div class="container <?php echo $newValue; ?>">
+                        <div class="row">
+                            <?php echo Setting::getValue($dbObj, str_replace("MENU", "CONTENT", $settingObj->name)) ? Setting::getValue($dbObj, str_replace("MENU", "CONTENT", $settingObj->name)) : ''; ?>
+                        </div>
                   <!-- /.row -->
-          </div>
-          <div class="container phases-of-course">
-
-              <div class="row">
-
-                  <div class="col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8 col-sm-12">
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
-                              <h4>Phase 1 – Teaching (2.5 months)</h4>
-                          </div>
-                          <div class="panel-body min_height">
-
-                            <strong>Focuses on the foundational knowledge of the markets and decision making</strong>
-                            <table class="table">
-                              <thead class="thead-inverse">
-                                <tr>
-                                  <th>Module</th>
-                                  <th>Fundamental Analysis*</th>
-                                  <th>Technical Analysis*</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>Financial Excellence </td>
-                                  <td>Technical Analysis</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td> Economics & Geo-Politics</td>
-                                  <td> Technical indicators</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">3</th>
-                                  <td>External Events</td>
-                                  <td>Risk management</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">4</th>
-                                  <td>Fundamental Analysis</td>
-                                  <td>Investor Psychology</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">5</th>
-                                  <td>The Wealth Plan</td>
-                                  <td>The Trading Plan</td>
-                                </tr>
-                              </tbody>
-                            </table>
-<!--
-
-                            <table>
-                            <tr>
-                            <th class="col-md-6 col-lg-6 col-sm-6">Technical Analysis(*)</th>
-                            <th class="col-md-6 col-lg-6 col-sm-6">Fundamental Analysis (*)</th>
-                            <th class="col-md-6 col-lg-6 col-sm-6">Technical Analysis(*)</th>
-                            </tr>
-                            <tr>
-                            <td>Financial Excellence </td>
-                            <td>Technical Analysis</td>
-                            </tr>
-                            <tr>
-                            <td> Economics & Geo-Politics </td>
-                            <td> Technical indicators</td>
-                            </tr>
-                            <tr>
-                            <td>External Events</td>
-                            <td>Risk management</td>
-                            </tr>
-                            <tr>
-                            <td>Fundamental Analysis </td>
-                            <td>Investor Psychology</td>
-                            </tr>
-                            <tr>
-                            <td>The Wealth Plan</td>
-                            <td>The Trading Plan</td>
-                            </tr>
-                            </table> -->
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row">
-                  <div class="col-md-6 col-lg-6 col-sm-12 ">
-                      <div class="panel panel-default ">
-                          <div class="panel-heading">
-                              <h4>Phase 2– Training (3.5 months)</h4>
-                          </div>
-                          <div class="panel-body pSameHeight">
-                            <strong>Focuses on the advanced knowledge of research, risk management, emotional management and money management</strong>
-                            <table class="table">
-                              <thead class="thead-inverse">
-                                <tr>
-                                  <th>Weekly Sessions</th>
-                                  <th>Twice Monthly Advanced Recorded Sessions</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-
-                                  <td>Real-Time Market Analysis (RTMA) – Focussing on events that will take place during the up-coming week: Trends; Challenges; Global Economic Events etc.</td>
-                                  <td>External Events – impact of various market activities that impact specific sectors & probable suggestions to avoid pitfalls.</td>
-                                </tr>
-                              </tbody>
-                            </table>
-
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-md-6 col-lg-6 col-sm-12 " >
-                      <div class="panel panel-default  ">
-                          <div class="panel-heading">
-                              <h4>Phase 3– Coaching (3.5 months)</h4>
-                          </div>
-                          <div class="panel-body pSameHeight">
-                            <table class="table">
-                              <thead class="thead-inverse">
-                                <tr>
-                                  <th></th>
-                                  <th><strong>Focuses on execution via 'Dummy Trading Accounts'</strong></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td scope="row">1</td>
-                                  <td>
-                                   Coach will go over your trading plan & review your paper trading records
-                                 </td>
-                               </tr>
-                               <tr>
-                                 <td scope="row">2</td>
-                                 <td>
-                                   How to set up trading account with your on-line broker.
-                                 </td>
-                               </tr>
-                               <tr>
-                                 <td scope="row">3</td>
-                                 <td>
-                                   How to access live data feeds from various web sites & to set up the parameters that was taught in the course.
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-
-<!--
-                            <table >
-                            <tr>
-                            <td>Trading Plan/ Paper Trading record Review</td>
-                            <td><ol>
-                             <li>Coach will go over your trading plan & review your paper trading records</li>
-                             <li>How to set up trading account with your on-line broker.</li>
-                             <li>How to access live data feeds from various web sites & to set up the parameters that was taught in the course.</li>
-                            </ol>
-                            </td>
-                            </tr>
-                            </table> -->
-                          </div>
-                      </div>
-                  </div>
-                </div>
-                  </div>
-              <!-- /.row -->
-      </div>
-
-      <div class="container outline-of-course">
-
-          <div class="row">
-              <div class="col-md-6 col-lg-6 col-sm-12">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                          <h4>PART A: FUNDMENTAL ANALYSIS</h4>
-                      </div>
-                      <div class="panel-body min_height">
-
-                       <ul class="list-group">
-                           <li class="list-group-item"><b>Module 1:</b> Financial Excellence (Capital Preservation & Risk Management) – Creating a vision & an executable plan to achieve investment goals</li>
-                           <li class="list-group-item"><b>Module 2:</b> Economics (The Laws of Supply & Demand) – Understanding the domestic & global movement of goods & services and its relationship to Economic Growth</li>
-                           <li class="list-group-item"><b>Module 3:</b> External Events (Globalization; Geopolitical & Other Events) – Comprehending the impact of external events on the psychology of market participants.</li>
-                           <li class="list-group-item"><b>Module 4:</b> Fundamental Analysis (Financial Analysis) – Determining the financial condition of specific targeted corporations.</li>
-                           <li class="list-group-item"><b>Module 5:</b> The Plan (Portfolio Management) – Creating a master wealth plan with an Investment Component and a Trading Component.</li>
-
-
-                       </ul>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-sm-12">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                          <h4>PART B: TECHNICAL ANALYSIS</h4>
-                      </div>
-                      <div class="panel-body min_height">
-                        <ul class="list-group">
-                             <li class="list-group-item"><b>Module 1:</b> Technical Analysis (Charting Basics) – Creating a pro-forma portfolio called the 'Focus Five' for the purposes of 'paper-trading' i.e. using a dummy account to learn.</li>
-                            <li class="list-group-item"><b>Module 2:</b> Technical Indicators (Specific Indicators & Market Direction) – Understanding how to use indicators to determine entry & exit strategies to improve 'paper-trading' results
-                            </li>
-                            <li class="list-group-item"><b>Module 3:</b> Risk Management (Protection) – Understanding Stop-Loss Strategies which are based on individual risk profiles</li>
-                            <li class="list-group-item"><b>Module 4:</b> Trading Plan (Target vs. Actual) – Learning from trades & correcting common mistakes
-                            </li>
-                            <li class="list-group-item"><b>Module 5:</b> Investor Psychology (Crowd Psychology & Individual Psychology) – Understanding emotional characteristics & eliminating Fear & Greed</li>
-
-                        </ul>
-
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-6 col-lg-6 col-sm-12 centerForced">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                          <h4>PART C: EMOTIONAL ANALYSIS</h4>
-                      </div>
-                      <div class="panel-body">
-
-
-                              <li class="list-group-item">Mitigating/Eliminating RISK through Risk management after comprehending an individual's risk tolerance and ascertaining the risk profile</li>
-                          </ul>
-
-                      </div>
-                  </div>
-              </div>
-              </div>
-          <!-- /.row -->
-      </div>
+                </div><?php $nums++; } ?>
             </div>
         </div><!--/.container-->
     </section><!--/#portfolio-->

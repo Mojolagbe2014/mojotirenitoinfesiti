@@ -12,7 +12,7 @@ define("PINTEREST_LINK", Setting::getValue($dbObj, 'PINTEREST_LINK') ? trim(stri
 define("DRIBBBLE_LINK", Setting::getValue($dbObj, 'DRIBBLE_LINK') ? trim(stripcslashes(strip_tags(Setting::getValue($dbObj, 'DRIBBLE_LINK')))) : '');
 define("YOUTUBE_LINK", Setting::getValue($dbObj, 'YOUTUBE_LINK') ? trim(stripcslashes(strip_tags(Setting::getValue($dbObj, 'YOUTUBE_LINK')))) : '');
 define("COMPANY_HOTLINE", Setting::getValue($dbObj, 'COMPANY_HOTLINE') ? trim(stripcslashes(strip_tags(Setting::getValue($dbObj, 'COMPANY_HOTLINE')))) : '');
-define("COMPANY_HOTLINE", Setting::getValue($dbObj, 'COMPANY_FAX') ? trim(stripcslashes(strip_tags(Setting::getValue($dbObj, 'COMPANY_FAX')))) : '');
+define("COMPANY_FAX", Setting::getValue($dbObj, 'COMPANY_FAX') ? trim(stripcslashes(strip_tags(Setting::getValue($dbObj, 'COMPANY_FAX')))) : '');
 define("COMPANY_EMAIL", Setting::getValue($dbObj, 'COMPANY_EMAIL') ? trim(stripcslashes(strip_tags(Setting::getValue($dbObj, 'COMPANY_EMAIL')))) : '');
 define("COMPANY_ADDRESS", Setting::getValue($dbObj, 'COMPANY_ADDRESS') ? Setting::getValue($dbObj, 'COMPANY_ADDRESS') : '');
 define("COMPANY_ADDRESS_GMAP", Setting::getValue($dbObj, 'COMPANY_ADDRESS_GMAP') ? trim(stripcslashes(strip_tags(Setting::getValue($dbObj, 'COMPANY_ADDRESS_GMAP')))) : '');
