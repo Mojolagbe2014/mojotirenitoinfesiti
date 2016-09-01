@@ -2,10 +2,14 @@
         <div class="container">
             <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
-              <div class="embed-responsive embed-responsive-16by9">
-
-                      <iframe width="854" height="480" src="https://www.youtube.com/embed/gNslMvvDznw?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
-                    </div>
+                <div class="embed-responsive embed-responsive-16by9">
+                  <video controls>
+                      <?php foreach ($videoObj->fetchRaw("*", " name = 'home_video_one' ", " name ASC LIMIT 1 ") as $video) { ?>
+                        <source src="media/video/<?php echo $video['video']; ?>" type="video/mp4">
+                      <?php } ?>
+                      Your browser does not support the video tag.
+                  </video>
+                </div>
             </div>
                 <div class="col-sm-12 col-lg-6 col-md-6">
 
