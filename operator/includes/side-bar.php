@@ -23,7 +23,8 @@
                     </li>
                     <li> <a href="#"><i class="fa fa-apple fa-2x"></i> Sliders Manager<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="manage-tutors">Manage Sliders</a> </li>
+                            <li> <a href="add-slider">Add Slider</a> </li>
+                            <li> <a href="manage-sliders">Manage Slider</a> </li>
                         </ul>
                     </li>
                     <li> <a href="#"><i class="fa fa-question-circle fa-2x"></i> FAQs Manager<span class="fa arrow"></span></a>
