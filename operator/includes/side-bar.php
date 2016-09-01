@@ -39,7 +39,7 @@
                     </li>
                     <li> <a href="#"><i class="fa fa-quote-left fa-2x"></i> Testimonials Manager<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="manage-quotes">Manage Testimonials</a> </li>
+                            <li> <a href="manage-testimonials">Manage Testimonials</a> </li>
                         </ul>
                     </li>
                     <li> <a href="#"><i class="fa fa-picture-o fa-2x"></i> Gallery Manager<span class="fa arrow"></span></a>

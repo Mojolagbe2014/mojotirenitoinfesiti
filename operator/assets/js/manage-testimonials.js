@@ -1,6 +1,6 @@
 var dataTable;
 $(document).ready(function(){
-    $("form#CreateQuote").submit(function(e){ 
+    $("form#CreateTestimonial").submit(function(e){ 
         e.stopPropagation();
         e.preventDefault();
         $(document).scrollTo('div.panel h3');
@@ -19,10 +19,10 @@ $(document).ready(function(){
                 }
                 else if(data.status != null && data.status == 1) { 
                     $("#messageBox, .messageBox").html('<div class="alert alert-'+alertType[data.status]+'"><button type="button" class="close" data-dismiss="alert">&times;</button>'+data.msg+'  </div>'); 
-                    $("form#CreateQuote")[0].reset();
-                    $('form#CreateQuote #addNewQuote').val('addNewQuote');
-                    $('form#CreateQuote #multi-action-catAddEdit').text('Add Quote');
-                    $('form#CreateQuote #oldFile').val(''); $('form#CreateQuote #oldFileComment').html('');
+                    $("form#CreateTestimonial")[0].reset();
+                    $('form#CreateTestimonial #addNewTestimonial').val('addNewTestimonial');
+                    $('form#CreateTestimonial #multi-action-catAddEdit').text('Add Testimonial');
+                    $('form#CreateTestimonial #oldFile').val(''); $('form#CreateTestimonial #oldFileComment').html('');
                 }
                 else $("#messageBox, .messageBox").html('<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button>'+data+'</div>');
                 dataTable.ajax.reload();
@@ -51,9 +51,9 @@ $(document).ready(function(){
         return false;
     });
     
-    loadAllQuotes();
-    function loadAllQuotes(){
-        dataTable = $('#quotelist').DataTable( {
+    loadAllTestimonials();
+    function loadAllTestimonials(){
+        dataTable = $('#testimoniallist').DataTable( {
             columnDefs: [ {
                 orderable: false,
                 className: 'select-checkbox',
@@ -68,13 +68,13 @@ $(document).ready(function(){
             "serverSide": true,
             "scrollX": true,
             "ajax":{
-                url :"../REST/manage-quotes.php", //employee-grid-data.php",// json datasource
+                url :"../REST/manage-testimonials.php", //employee-grid-data.php",// json datasource
                 type: "post",  // method  , by default get
-                data: {fetchQuotes:'true'},
+                data: {fetchTestimonials:'true'},
                 error: function(){  // error handling
-                        $("#quotelist-error").html("");
-                        $("#quotelist").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-                        $("#quotelist_processing").css("display","none");
+                        $("#testimoniallist-error").html("");
+                        $("#testimoniallist").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+                        $("#testimoniallist_processing").css("display","none");
 
                 }
             }
@@ -91,13 +91,13 @@ $(document).ready(function(){
         }
     });
     //Handler for multiple selection
-    $('.multi-delete-quote').click(function(){
-        if(confirm("Are you sure you want to delete selected quote(s)?")) {
-            if($('#multi-action-box').prop("checked") || $('#quotelist :checkbox:checked').length > 0) {
-                var atLeastOneIsChecked = $('#quotelist :checkbox:checked').length > 0;
+    $('.multi-delete-testimonial').click(function(){
+        if(confirm("Are you sure you want to delete selected testimonial(s)?")) {
+            if($('#multi-action-box').prop("checked") || $('#testimoniallist :checkbox:checked').length > 0) {
+                var atLeastOneIsChecked = $('#testimoniallist :checkbox:checked').length > 0;
                 if (atLeastOneIsChecked !== false) {
-                    $('#quotelist :checkbox:checked').each(function(){
-                        deleteQuote($(this).attr('data-id'),$(this).attr('data-image'));
+                    $('#testimoniallist :checkbox:checked').each(function(){
+                        deleteTestimonial($(this).attr('data-id'),$(this).attr('data-image'));
                     });
                 }
                 else alert("No row selected. You must select atleast a row.");
@@ -106,18 +106,18 @@ $(document).ready(function(){
         }
     });
     
-    $(document).on('click', '.delete-quote', function() {
-        if(confirm("Are you sure you want to delete this quote? Quote: '"+$(this).find('span').html()+"'")) deleteQuote($(this).attr('data-id'),$(this).attr('data-image'));
+    $(document).on('click', '.delete-testimonial', function() {
+        if(confirm("Are you sure you want to delete this testimonial? Testimonial: '"+$(this).find('span').html()+"'")) deleteTestimonial($(this).attr('data-id'),$(this).attr('data-image'));
     });
-    $(document).on('click', '.edit-quote', function() {
-        if(confirm("Are you sure you want to edit this quote? Quote: '"+$(this).find('span').html()+"'")) editQuote($(this).attr('data-id'), $(this).find('span').html(), $(this).attr('data-author'), $(this).attr('data-image'));
+    $(document).on('click', '.edit-testimonial', function() {
+        if(confirm("Are you sure you want to edit this testimonial? Testimonial: '"+$(this).find('span').html()+"'")) editTestimonial($(this).attr('data-id'), $(this).find('span').html(), $(this).attr('data-author'), $(this).attr('data-image'));
     });
     
-    function deleteQuote(id,image){
+    function deleteTestimonial(id,image){
         $.ajax({
-            url: "../REST/manage-quotes.php",
+            url: "../REST/manage-testimonials.php",
             type: 'POST',
-            data: {deleteThisQuote: 'true', id:id, image:image},
+            data: {deleteThisTestimonial: 'true', id:id, image:image},
             cache: false,
             success : function(data, status) {
                 if(data.status === 1){
@@ -150,13 +150,13 @@ $(document).ready(function(){
         });
     }
     
-    function editQuote(id, content, author, image){//,
-        $('form #addNewQuote').val('editQuote');
-        $('form #multi-action-catAddEdit').text('Update Quote');
+    function editTestimonial(id, content, author, image){//,
+        $('form #addNewTestimonial').val('editTestimonial');
+        $('form #multi-action-catAddEdit').text('Update Testimonial');
         $(document).scrollTo('div#hiddenUpdateForm');
         var formVar = {id:id, content:content, author:author, image:image};
         $.each(formVar, function(key, value) { 
-            if(key == 'image') { $('form #oldFile').val(value); $('form #oldFileComment').html('<img src="../media/quote/'+value+'" style="width:50px;height:50px; margin:5px">');} 
+            if(key == 'image') { $('form #oldFile').val(value); $('form #oldFileComment').html('<img src="../media/testimonial/'+value+'" style="width:50px;height:50px; margin:5px">');} 
             $('form #'+key).val(value); 
         });
         
