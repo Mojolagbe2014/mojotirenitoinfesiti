@@ -66,7 +66,7 @@ else{
     
     if(filter_input(INPUT_POST, "fetchNews") != NULL){
         $requestData= $_REQUEST;
-        $columns = array( 0 =>'id', 1 =>'id', 2 => 'status', 3 => 'title', 4 => 'image', 5 => 'description', 7 =>'date_added');
+        $columns = array( 0 =>'id', 1 =>'id', 2 => 'status', 3 => 'title', 4 => 'image', 5 => 'description', 6 =>'date_added');
 
         // getting total number records without any search
         $query = $dbObj->query("SELECT * FROM news ");
