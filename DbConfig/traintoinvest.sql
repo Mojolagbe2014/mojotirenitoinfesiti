@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2016 at 08:42 PM
+-- Generation Time: Sep 02, 2016 at 06:39 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `admin` 
 --
 
 DROP TABLE IF EXISTS `admin`;
@@ -118,8 +118,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
 --
 
 INSERT INTO `faq` (`id`, `question`, `answer`, `date_added`) VALUES
-(1, 'What happens if I am unable to attend a course and I have already paid?', 'Your payment will be withhold until you attend a course of the same amount.', '2016-01-20'),
-(4, 'Request for reactivation of my account', 'Request for reactivation of my account', '2016-09-01');
+(1, 'What happens if I am unable to attend a course and I have already paid?', 'Your payment will be withhold until you attend a course of the same amount.', '2016-01-20');
 
 -- --------------------------------------------------------
 
@@ -143,8 +142,8 @@ CREATE TABLE IF NOT EXISTS `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `description`, `image`, `status`, `date_added`) VALUES
-(1, 'Nigerians students studying in Malaysia envoy', '<p><span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Abuja &ndash; Malaysia&rsquo;s High Commissioner to Nigeria, Amb. Datuk Lim Juay Jin, says 13,000 Nigerians are currently studying at various levels in educational institutions in Malaysia. Datuk Lim made the disclosure in an interview with the News Agency of Nigeria (NAN) in Abuja on Wednesday on the sideline of the flag hoisting ceremony to mark the 59th Independence anniversary of Malaysia.</span><br />\r\n<br />\r\n<span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Read more at: http://www.vanguardngr.com/2016/08/13000-nigerians-students-studying-malaysia-envoy/</span></p>\r\n', '484659_nigerians_students_studying_in_malaysia_envoy.jpg', 0, '2016-09-01 00:08:21'),
-(2, 'Independence anniversary of Malaysia', '<p><span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Abuja &ndash; Malaysia&rsquo;s High Commissioner to Nigeria, Amb. Datuk Lim Juay Jin, says 13,000 Nigerians are currently studying at various levels in educational institutions in Malaysia. Datuk Lim made the disclosure in an interview with the News Agency of Nigeria (NAN) in Abuja on Wednesday on the sideline of the flag hoisting ceremony to mark the 59th Independence anniversary of Malaysia.</span><br />\r\n<br />\r\n<span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Read more at: http://www.vanguardngr.com/2016/08/13000-nigerians-students-studying-malaysia-envoy/</span></p>\r\n', '119555_independence_anniversary_of_malaysia.jpg', 1, '2016-09-01 00:34:17');
+(1, 'Nigerians students studying in Malaysia envoy', 'Al Jazeera English released its first Facebook Messenger Bot today. It took us two weeks to build it. This includes researching the current news bots, gathering requirements, develop the bot, and performing some user testing.<br />\r\nThe development team was Omran Abazid and Alaa Batayneh.<br />\r\nThe idea behind the bot is simple, in a nutshell, we deliver the right news at the right time by allowing users to choose the type of news they are interested in. Users can decide how often they want to receive breaking news articles, when to receive them, and when to stop receiving them.<br />\r\nFrom the beginning we decided to integrate Facebook&rsquo;s Instant Articles into the bot in order to keep it modular.', '484659_nigerians_students_studying_in_malaysia_envoy.jpg', 1, '2016-09-01 00:08:21'),
+(2, 'Independence anniversary of Malaysia', '<p><span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Abuja &ndash; Malaysia&rsquo;s High Commissioner to Nigeria, Amb. Datuk Lim Juay Jin, says 13,000 Nigerians are currently studying at various levels in educational institutions in Malaysia. Datuk Lim made the disclosure in an interview with the News Agency of Nigeria (NAN) in Abuja on Wednesday on the sideline of the flag hoisting ceremony to mark the 59th Independence anniversary of Malaysia.<br />\r\n<img alt="" src="http://localhost/mojotirenitoinfesiti/media/gallery/1.png" style="width: 157px; height: 103px;" /></span><br />\r\n<br />\r\n<span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Read more at: http://www.vanguardngr.com/2016/08/13000-nigerians-students-studying-malaysia-envoy/</span></p>\r\n', '762503_independence_anniversary_of_malaysia.png', 1, '2016-09-01 00:34:17');
 
 -- --------------------------------------------------------
 
@@ -193,6 +192,7 @@ INSERT INTO `setting` (`name`, `value`) VALUES
 ('THE_PROGRAM_MENU_1', '<p>BASIC REQUIREMENTS</p>\r\n'),
 ('THE_PROGRAM_MENU_2', '<p>PROGRAM PHASES</p>\r\n'),
 ('THE_PROGRAM_MENU_3', '<p>OUTLINE</p>\r\n'),
+('TOTAL_DISPLAYABLE_TESTIMONIAL', '50'),
 ('TWITTER_ID', '<p>0</p>\r\n'),
 ('TWITTER_LINK', '<p>https://twitter.com/</p>\r\n'),
 ('WELCOME_MESSAGE', '<div class="col-lg-6"><strong class="strong-logo">TRAIN<strong class="h2-red">2</strong>INVEST</strong><span> is attempting to transform Canadian families in the arena of wealth building and more importantly wealth management! Think about this:</span>\r\n\r\n<h3>WHO TAUGHT US WEALTH MANAGEMENT?</h3>\r\n\r\n<h3><span>Did we learn about managing wealth:</span></h3>\r\n\r\n<ul>\r\n	<li><a href="#">From School?</a></li>\r\n	<li><a href="#">From Parents?</a></li>\r\n	<li><a href="#">From Friends?</a></li>\r\n	<li><a href="#">From Books/Seminars?</a></li>\r\n	<li><a href="#">From Universities/Colleges?</a></li>\r\n</ul>\r\n<strong>Answer: </strong><span>Usually through OSMOSIS - from a combination of the above <strong>OR</strong> more likely through <strong>TRIAL &amp; ERROR.</strong></span></div>\r\n\r\n<div class="col-lg-6"><strong>WHAT IF:</strong><br />\r\n<span>You had a personal TEACHER, TRAINER and a COACH that taught you and continues to mentor you on how to manage your savings(incl. PRSP/TFSA etc) so that has your money was working for you!</span><br />\r\n<br />\r\n<span>OK...too old...don&#39;t know math...too busy. These are ALL excuses!</span><br />\r\n<br />\r\n<span>The <strong class="strong-logo">TRAIN<strong class="h2-red">2</strong>INVEST</strong> strategy ensures that a person with Grade 12 education or someone with 10 years of working experience(street smarts) is able not only to comprehend investment concepts but who can execute them within 6 months!</span><br />\r\n<br />\r\n<span>How can we be sure?? We have thousands of clients just like you!</span><br />\r\n<a href="#testimonial">Check out our testimonials!</a></div>\r\n'),
@@ -262,30 +262,17 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(300) NOT NULL,
   `email` varchar(200) NOT NULL,
   `company` text NOT NULL,
-  `country` varchar(100) NOT NULL,
-  `description` text NOT NULL,
-  `picture` text NOT NULL,
-  `website` varchar(300) NOT NULL,
-  `skype_id` varchar(200) NOT NULL,
-  `yahoo_id` varchar(200) NOT NULL,
-  `phone` varchar(50) NOT NULL,
-  `address` varchar(500) NOT NULL,
-  `username` varchar(300) NOT NULL,
-  `password` varchar(500) NOT NULL,
-  `time_entered` varchar(100) NOT NULL,
-  `status` tinyint(4) NOT NULL,
-  `facebook_id` varchar(300) NOT NULL,
-  `twitter_id` varchar(400) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `company`, `country`, `description`, `picture`, `website`, `skype_id`, `yahoo_id`, `phone`, `address`, `username`, `password`, `time_entered`, `status`, `facebook_id`, `twitter_id`) VALUES
-(1, 'Kaiste Ventures Limited', 'info@kaisteventures.com', '', '', '', '', '', '', '', '', '', '', '', '1453378931', 0, '', '');
+INSERT INTO `user` (`id`, `name`, `email`, `company`) VALUES
+(1, 'Kaiste Ventures Limited', 'info@kaisteventures.com', ''),
+(3, 'Mojolagbe', 'mojolagbe@gmail.com', '');
 
 -- --------------------------------------------------------
 
