@@ -33,7 +33,7 @@
                         <li class="scroll"><a href="#portfolio">The Program</a></li>
                         <li class="scroll"><a href="#testimonial">Testimonals</a></li> 
                         <li class="scroll"><a href="#features">Breaking News</a></li>
-                        <li class="scroll"><a href="#get-in-touch">Contact</a></li>
+                        <li class="scroll"><a href="#contactus">Contact</a></li>
                         <li><a href="<?php echo FACEBOOK_LINK; ?>" title="Socialize with us on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x" style="color:blue"></i></a></li>
                         <li><a href="#subscribeForm" title="Subscribe to our newsletter"><i class="fa fa-user fa-2x"></i></a></li>
                     </ul>
