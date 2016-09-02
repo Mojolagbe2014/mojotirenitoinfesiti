@@ -130,6 +130,35 @@
                         <p><strong>Fax:</strong> <?php echo COMPANY_FAX; ?></p>
                         <p><strong>Email:</strong> <?php echo COMPANY_EMAIL; ?></p>
                         <p><strong>Address:</strong> <?php echo COMPANY_ADDRESS; ?></p>
+                        <form class="well form-horizontal" action="<?php echo SITE_URL; ?>REST/subscribe.php" method="post" id="subscribeForm">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Name</label>  
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <input  name="subscriberName" id="subscriberName" required="yes" placeholder="Full Name" class="form-control"  type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">E-Mail</label>  
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                                <input name="subscriberEmail" required="yes" placeholder="E-Mail Address" class="form-control"  type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label"></label>  
+                                        <div class="col-md-8">
+                                            <button type="submit" name="subscriberSubmit" class="btn btn-warning" >Subscribe to Newsletter</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
                     </div>
                 </div>
             </div>

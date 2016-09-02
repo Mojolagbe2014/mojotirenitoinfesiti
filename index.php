@@ -15,6 +15,7 @@ $brochureObj = new CourseBrochure($dbObj);
 $videoObj = new Video($dbObj);
 $settingObj = new Setting($dbObj);
 $Obj = new Setting($dbObj);
+$userObj = new User($dbObj); // Create an object of Admin class
 $errorArr = array(); //Array of errors
 $msg = ''; $msgStatus = '';
 

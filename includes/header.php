@@ -1,4 +1,18 @@
-
+            <div>
+                    <?php if(isset($_SESSION['msg'])) {  ?>
+                    <script src="<?php echo SITE_URL; ?>sweet-alert/sweetalert.min.js" type="text/javascript"></script>
+                    <script>
+                        swal({
+                            title: "Message Box!",
+                            text: '<?php echo $_SESSION['msg']; ?>',
+                            confirmButtonText: "Okay",
+                            customClass: 'twitter',
+                            html: true,
+                            type: '<?php echo $_SESSION['msgStatus']; ?>'
+                        });
+                    </script>
+                    <?php  unset($_SESSION['msg']); unset($_SESSION['msgStatus']);  } ?>
+                </div>
     <header id="header">
         <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
             <div class="container navbar-header">
@@ -21,7 +35,7 @@
                         <li class="scroll"><a href="#features">Breaking News</a></li>
                         <li class="scroll"><a href="#get-in-touch">Contact</a></li>
                         <li><a href="<?php echo FACEBOOK_LINK; ?>" title="Socialize with us on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x" style="color:blue"></i></a></li>
-                        <li><a href="javascript:;" title="Subscribe to our newsletter"><i class="fa fa-user fa-2x"></i></a></li>
+                        <li><a href="#subscribeForm" title="Subscribe to our newsletter"><i class="fa fa-user fa-2x"></i></a></li>
                     </ul>
                 </div>
             </div><!--/.container-->

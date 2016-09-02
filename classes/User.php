@@ -36,8 +36,8 @@ class User implements ContentManipulator{
      * @return JSON JSON encoded string/result
      */
     function add(){
-        $sql = "INSERT INTO ".self::$tableName." (email, name, company, time_entered) "
-                ."VALUES ('{$this->email}','{$this->name}','{$this->company}','". time()."')";
+        $sql = "INSERT INTO ".self::$tableName." (email, name, company) "
+                ."VALUES ('{$this->email}','{$this->name}','{$this->company}')";
         if($this->notEmpty($this->name,$this->email,$this->company)){
             $result = self::$dbObj->query($sql);
             if($result !== false){ $json = array("status" => 1, "msg" => "Done, user successfully added!"); }
@@ -55,8 +55,8 @@ class User implements ContentManipulator{
      * @return string Sucess|Error
      */
     function addRaw(){
-        $sql = "INSERT INTO ".self::$tableName." (email, name, company, time_entered) "
-                ."VALUES ('{$this->email}','{$this->name}','{$this->company}','". time()."')";
+        $sql = "INSERT INTO ".self::$tableName." (email, name, company) "
+                ."VALUES ('{$this->email}','{$this->name}','{$this->company}')";
         if($this->notEmpty($this->name,$this->email)){
             $result = self::$dbObj->query($sql);
             if($result !== false){ return 'success'; }
@@ -136,7 +136,7 @@ class User implements ContentManipulator{
         $result =array(); 
         if(count($data)>0){
             foreach($data as $r){
-                $result[] = array("id" => $r['id'], "email" =>  utf8_encode($r['email']), 'name' =>  utf8_encode($r['name']), 'company' =>  utf8_encode($r['company']), 'timeEntered' =>  utf8_encode($r['time_entered']));
+                $result[] = array("id" => $r['id'], "email" =>  utf8_encode($r['email']), 'name' =>  utf8_encode($r['name']), 'company' =>  utf8_encode($r['company']));
             }
             $json = array("status" => 1, "info" => $result);
         } 
