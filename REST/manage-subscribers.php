@@ -132,7 +132,18 @@ else{
 //            $headers .= "Reply-To: $emailAddress \r\n";
             
             //fix gmail image problem
-            if(strpos($email, "@gmail.com")!=false) { $message->attach( Swift_Attachment::fromPath("../media/news/$mainImage")->setFilename($mainImage));}
+            //if(strpos($email, "@gmail.com")!=false) { 
+                $doc = new DOMDocument();
+                $doc->loadHTML($newsObj->description);
+                $imageTags = $doc->getElementsByTagName('img');
+
+                foreach($imageTags as $tag) {
+                    $thisTagSrc = $tag->getAttribute('src');
+                    $message->attach( 
+                        Swift_Attachment::fromPath($thisTagSrc)->setFilename(basename($thisTagSrc))
+                    );
+                }
+            //}
             
             $mailer->send($message);
             //mail($email, $subject, $body, $headers);
