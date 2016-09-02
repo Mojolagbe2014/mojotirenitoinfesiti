@@ -7,6 +7,7 @@ $thisPage = new WebPage(); //Create new instance of webPage class
 
 $dbObj = new Database();//Instantiate database
 $userObj = new User($dbObj); // Create an object of User class
+$newsObj = new News($dbObj);
 $errorArr = array(); //Array of errors
 $email =''; $name =''; $subject=''; $message; $body = '';
 
@@ -102,8 +103,38 @@ else{
     } 
 
     if(filter_input(INPUT_POST, "sendEmails")!=NULL && filter_input(INPUT_POST, "newsType")!="custom"){
-        $json = array("status" => 1, "msg" => "News Message"); 
-        header('Content-type: application/json');
-        echo json_encode($json);
+        $postVars = array('email', 'name', 'newsType'); // Form fields names
+        //Validate the POST variables and add up to error message if empty
+        foreach ($postVars as $postVar){
+            switch($postVar){
+                default     :   $$postVar = filter_input(INPUT_POST, $postVar) ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, $postVar)) :  ''; 
+                                if($$postVar === "") {array_push ($errorArr, "Please enter $postVar ");}
+                                break;
+            }
+        }
+        if(count($errorArr) < 1)   { 
+            include('../includes/email-template.php');
+            $emailAddress = COMPANY_EMAIL;
+            $transport = Swift_MailTransport::newInstance();
+            $message = Swift_Message::newInstance();
+            $message->setTo(array($email => $name));
+            $message->setSubject("Newsletter - ".$newsObj->title);
+            $message->setBody($body);
+            $message->setFrom($emailAddress, WEBSITE_AUTHOR);
+            $message->setContentType("text/html");
+            $mailer = Swift_Mailer::newInstance($transport);
+            $mailer->send($message);
+            
+            $json = array("status" => 1, "msg" => "Your newsletter to $name has been sent."); 
+            $dbObj->close();//Close Database Connection
+            header('Content-type: application/json');
+            echo json_encode($json);
+        }
+        else{ 
+            $json = array("status" => 0, "msg" => $errorArr); 
+            $dbObj->close();//Close Database Connection
+            header('Content-type: application/json');
+            echo json_encode($json);
+        }
     }
 }
