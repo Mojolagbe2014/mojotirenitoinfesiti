@@ -113,17 +113,29 @@ else{
             }
         }
         if(count($errorArr) < 1)   { 
-            include('../includes/email-template.php');
+            
             $emailAddress = COMPANY_EMAIL;
+            $subject = "Newsletter - ".$newsObj->title;
             $transport = Swift_MailTransport::newInstance();
             $message = Swift_Message::newInstance();
             $message->setTo(array($email => $name));
-            $message->setSubject("Newsletter - ".$newsObj->title);
+            $message->setSubject($subject);
+            include('../includes/email-template.php');
             $message->setBody($body);
             $message->setFrom($emailAddress, WEBSITE_AUTHOR);
             $message->setContentType("text/html");
             $mailer = Swift_Mailer::newInstance($transport);
+            
+//            $headers = 'MIME-Version: 1.0' . "\r\n";
+//            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+//            $headers .= "From:$emailAddress \r\n";
+//            $headers .= "Reply-To: $emailAddress \r\n";
+            
+            //fix gmail image problem
+            if(strpos($email, "@gmail.com")!=false) { $message->attach( Swift_Attachment::fromPath("../media/news/$mainImage")->setFilename($mainImage));}
+            
             $mailer->send($message);
+            //mail($email, $subject, $body, $headers);
             
             $json = array("status" => 1, "msg" => "Your newsletter to $name has been sent."); 
             $dbObj->close();//Close Database Connection

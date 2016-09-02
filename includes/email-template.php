@@ -2,12 +2,15 @@
 $companyName = WEBSITE_AUTHOR;
 $siteUrl = SITE_URL;
 $unsubscribeLink = SITE_URL."REST/unsubscribe.php?email=".$email."&id=".User::getSingle($dbObj, 'id', $email);
+$mainImage = "";
 
 foreach ($newsObj->fetchRaw("*", " status = 1 AND id = $newsType ", " date_added DESC LIMIT 1") as $news) {
     $newsData = array('id' => 'id', 'title' => 'title', 'image' => 'image', 'description' => 'description', 'dateAdded' => 'date_added', 'status' => 'status');
     foreach ($newsData as $key => $value){
         switch ($key) { 
-            case 'image': $newsObj->$key = MEDIA_FILES_PATH1.'news/'.$news[$value];break;
+            case 'image': $mainImage = $news[$value];
+                          $newsObj->$key = MEDIA_FILES_PATH1.'news/'.$news[$value];
+                          break;
             default     :   $newsObj->$key = $news[$value]; break; 
         }
     }
@@ -31,7 +34,7 @@ $body = <<<EOT
 <div class="content" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; display: block; max-width: 600px; margin: 0 auto; padding: 0;">
 <table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; width: 100%; margin: 0; padding: 0;"><tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
 <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
-<div><img style="width:100%; height:200px;" src="{$newsObj->image}"></div>
+<div><img style="width:100%; height:200px;" src="{$message->embed(Swift_Image::fromPath($newsObj->image))}"></div>
 <h2 style="font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 28px; line-height: 1.2em; color: #111111; font-weight: 200; margin: 40px 0 10px; padding: 0;text-align:center">{$newsObj->title}</h2>
 <div style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6em; font-weight: normal; margin: 0 0 10px; padding: 0;">{$newsObj->description}</div>
 
