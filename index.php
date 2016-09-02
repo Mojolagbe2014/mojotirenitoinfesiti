@@ -3,6 +3,7 @@ session_start();
 define("CONST_FILE_PATH", "includes/constants.php");
 define("CURRENT_PAGE", "home");
 require('classes/WebPage.php'); //Set up page as a web page
+require 'swiftmailer/lib/swift_required.php';
 $thisPage = new WebPage(); //Create new instance of webPage class
 
 $dbObj = new Database();//Instantiate database
@@ -13,9 +14,62 @@ $testimonialObj = new Testimonial($dbObj);
 $brochureObj = new CourseBrochure($dbObj);
 $videoObj = new Video($dbObj);
 $settingObj = new Setting($dbObj);
+$errorArr = array(); //Array of errors
+$msg = ''; $msgStatus = '';
 
 include('includes/other-settings.php');
 require('includes/page-properties.php');
+if(isset($_POST['submit'])){
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL) ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL)) :  ''; 
+    if($email == "") {array_push ($errorArr, "valid email ");}
+    $name = filter_input(INPUT_POST, 'fname') ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'fname')) :  ''; 
+    if($name == "") {array_push ($errorArr, " name ");}
+    $address = filter_input(INPUT_POST, 'address') ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'address')) :  ''; 
+    if($address == "") {array_push ($errorArr, " address ");}
+    $state = filter_input(INPUT_POST, 'state') ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'state')) :  ''; 
+    if($state == "") {array_push ($errorArr, " state/province ");}
+    $postCode = filter_input(INPUT_POST, 'post') ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'post')) :  ''; 
+    if($postCode == "") {array_push ($errorArr, " postal code ");}
+    $country = filter_input(INPUT_POST, 'country') ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'country')) :  ''; 
+    if($country == "") {array_push ($errorArr, " country ");}
+    $telephone = filter_input(INPUT_POST, 'telephone') ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'telephone')) :  ''; 
+    if($telephone == "") {array_push ($errorArr, " telephone ");}
+    $body = filter_input(INPUT_POST, 'message') ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'message')) :  ''; 
+    if($body == "") {array_push ($errorArr, " message ");}
+    $subject = filter_input(INPUT_POST, 'subject') ? mysqli_real_escape_string($dbObj->connection, filter_input(INPUT_POST, 'subject')) :  ''; 
+
+    $captcha = trim(strtolower($_REQUEST['captcha'])) != $_SESSION['captcha'] ? "" : 1;
+    if($captcha == "") {array_push ($errorArr, " captcha ");}
+    
+    
+    if(count($errorArr) < 1)   {
+        $emailAddress = COMPANY_EMAIL;//iadet910@iadet.net
+        if(empty($subject)) $subject = "Message From: $name";	
+        $transport = Swift_MailTransport::newInstance();
+        $message = Swift_Message::newInstance();
+        
+            $content = "<table>";
+            $content .= "<tr>";
+            $content .= "<th>Full Name</th><th>Address</th> <th>State</th><th>Post Code</th><th>Country</th><th>Telephone</th><th>Email</th><th>Message</th>";
+            $content .= "</tr>";
+            $content .= "<tr>";
+            $content .= "<td>" . $name . "</td><td>" . $address . "</td> <td>" . $state . "</td><td>" . $postCode . "</td><td>" . $country . "</td><td>" . $telephone . "</td><td>" . $email. "</td><td>" . $body . "</td>";
+            $content .= "</tr>";
+            $content .= "</table>";
+            $content .= "</body>";
+            $content .= "</html>";
+        
+        $message->setTo(array($emailAddress => WEBSITE_AUTHOR));
+        $message->setSubject($subject);
+        $message->setBody($content);
+        $message->setFrom($email, $name);
+        $message->setContentType("text/html");
+        $mailer = Swift_Mailer::newInstance($transport);
+        $mailer->send($message);
+        $msgStatus = 'success';
+        $msg = $thisPage->messageBox('Your message has been sent.', 'success');
+    }else{ $msgStatus = 'error'; $msg = $thisPage->showError($errorArr); }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +96,7 @@ require('includes/page-properties.php');
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     <link href="<?php echo SITE_URL; ?>sweet-alert/sweetalert.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo SITE_URL; ?>sweet-alert/twitter.css" rel="stylesheet" type="text/css"/>
+    <style>div#second-video {padding-bottom: 46.25%;}</style>
 </head><!--/head-->
 
 <body id="home" class="homepage">
@@ -84,15 +139,20 @@ require('includes/page-properties.php');
 
     <?php include('includes/testimonials.php'); ?>
 
-    <section id="get-in-touch">
+    <section id="get-in-touch" style="padding: 20px 0 10px;">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title text-center wow fadeInDown">Get in Touch</h2>
-                <p class="text-center wow fadeInDown">You Can Email Us <br>Here ! </p>
+                <p class="text-center wow fadeInDown">You Can Email Us Here ! </p>
             </div>
-            <div class="embed-responsive embed-responsive-16by9">
-                       <iframe width="560" height="315" src="https://www.youtube.com/embed/bD9KI29lXwc?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
-                    </div>
+            <div class="embed-responsive embed-responsive-16by9" id="second-video">
+                <video controls>
+                      <?php foreach ($videoObj->fetchRaw("*", " name = 'home_video_two' ", " name ASC LIMIT 1 ") as $video) { ?>
+                        <source src="media/video/<?php echo $video['video']; ?>" type="video/mp4">
+                      <?php } ?>
+                      Your browser does not support the video tag.
+                  </video>
+            </div>
 
         </div>
     </section><!--/#get-in-touch-->
@@ -114,5 +174,18 @@ require('includes/page-properties.php');
     <script src="js/jquery.inview.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/main.js"></script>
+    <?php if(!empty($msg)) {  $swalTitle = 'Message Sent!'; if($msgStatus!='success'){ $swalTitle = 'Message Not Sent!';}     ?>
+    <script src="<?php echo SITE_URL; ?>sweet-alert/sweetalert.min.js" type="text/javascript"></script>
+    <script>
+        swal({
+            title: '<?php echo $swalTitle; ?>',
+            text: '<?php echo $msg; ?>',
+            confirmButtonText: "Okay",
+            customClass: 'facebook',
+            html: true,
+            type: '<?php echo $msgStatus; ?>'
+        });
+    </script>
+    <?php  $msg =''; $msgStatus ='';  } ?>
 </body>
 </html>

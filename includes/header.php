@@ -1,18 +1,4 @@
-                    <div>
-                    <?php if(isset($_SESSION['msg'])) {  ?>
-                    <script src="<?php echo SITE_URL; ?>sweet-alert/sweetalert.min.js" type="text/javascript"></script>
-                    <script>
-                        swal({
-                            title: "Message Box!",
-                            text: '<?php echo $_SESSION['msg']; ?>',
-                            confirmButtonText: "Okay",
-                            customClass: 'twitter',
-                            html: true,
-                            type: '<?php echo $_SESSION['msgStatus']; ?>'
-                        });
-                    </script>
-                    <?php  unset($_SESSION['msg']); unset($_SESSION['msgStatus']);  } ?>
-                    </div>
+
     <header id="header">
         <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
             <div class="container navbar-header">
