@@ -32,7 +32,7 @@ $errorArr = array(); //Array of errors
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                    <div class="messageBox"></div>
+                    <div id="messageBox"></div>
                     <div class="col-md-12">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -58,6 +58,7 @@ $errorArr = array(); //Array of errors
                                     </table>
                                 </div>
                             </div>
+                            <div class="messageBox"></div>
                             <div class="panel panel-info" id="hiddenUpdateForm">
                             <div class="panel-heading">
                                 <h3> <i class="fa fa-envelope"></i> Compose Email Message</h3>
@@ -65,18 +66,26 @@ $errorArr = array(); //Array of errors
                             <div class="panel-body">
                                 <form role="form" id="emailSenderForm" name="emailSenderForm" method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
+                                        <label class="control-label" for="newsType">Message Type:</label>
+                                        <div class="controls">
+                                            <select tabindex="1" name="newsType" id="newsType" data-placeholder="Custom Message" class="form-control">
+                                                <option value="custom"> -- Custom Message -- </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label" for="subject">Subject:</label>
                                         <div class="controls">
                                             <input type="hidden" id="id" name="id" value=""/>
                                             
-                                            <input type="text" id="subject" name="subject" placeholder="mail subject" class="form-control" required="required">
+                                            <input type="text" id="subject" name="subject" placeholder="mail subject" class="form-control">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group">
                                         <label class="control-label" for="message">Body:</label>
                                         <div class="controls">
-                                            <textarea class="span5" id="message" name="message" class="form-control"  required="required"></textarea>
+                                            <textarea class="span5" id="message" name="message" class="form-control"></textarea>
                                             <script>
                                                 var ckeditor = CKEDITOR.replace('message');
                                             </script>

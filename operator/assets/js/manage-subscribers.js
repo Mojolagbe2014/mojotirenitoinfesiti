@@ -1,5 +1,27 @@
 var dataTable;
 $(document).ready(function(){
+    $.ajax({
+        url: "../REST/fetch-news.php",
+        type: 'POST',
+        cache: false,
+        success : function(data, status) {
+            $('#newsType').empty();
+            if(data.status === 0 ){ 
+                $("#messageBox, .messageBox").html('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>News loading error. '+data.msg ? data.msg : data+'</div>');
+            }
+            if(data.status === 2 ){ 
+                $("#messageBox, .messageBox").html('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button>No news available</div>');
+                $('#newsType').append('<option value="custom">-- No news available --</option>');
+            }
+            else if(data.status ===1 && data.info.length > 0){
+                $('#newsType').append('<option value="custom">-- Custom Message --</option>');
+                $.each(data.info, function(i, item) {
+                    $('#newsType').append('<option value="'+item.id+'">'+item.title.substr(0,50)  +' ---------------- '+ item.dateAdded + '</option>');
+                });
+            } 
+
+        }
+    });
     
     loadAllSubscribers();
     function loadAllSubscribers(){
@@ -63,7 +85,7 @@ $(document).ready(function(){
                 var atLeastOneIsChecked = $('#subscriberlist :checkbox:checked').length > 0;
                 if (atLeastOneIsChecked !== false) {
                     $('#subscriberlist :checkbox:checked').each(function(){
-                        emailSubscriber($(this).attr('data-email'), $(this).attr('data-name'), $('form#emailSenderForm #subject').val(), CKEDITOR.instances['message'].getData());
+                        emailSubscriber($(this).attr('data-email'), $(this).attr('data-name'), $('form#emailSenderForm #subject').val(), CKEDITOR.instances['message'].getData(), $('form#emailSenderForm #newsType').val());
                     });
                 }
                 else alert("No row selected. You must select atleast a row.");
@@ -113,11 +135,11 @@ $(document).ready(function(){
         });
     }
     
-    function emailSubscriber(email, name, subject, message){
+    function emailSubscriber(email, name, subject, message, newsType){
         $.ajax({
             url: "../REST/manage-subscribers.php",
             type: 'POST',
-            data: {sendEmails: 'true', email:email, name:name, subject:subject, message:message},
+            data: {sendEmails: 'true', email:email, name:name, subject:subject, message:message, newsType:newsType},
             cache: false,
             success : function(data, status) {
                 if(data.status === 1){

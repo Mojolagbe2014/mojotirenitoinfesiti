@@ -60,7 +60,7 @@ else{
 
     } 
     
-    if(filter_input(INPUT_POST, "sendEmails")!=NULL){
+    if(filter_input(INPUT_POST, "sendEmails")!=NULL && filter_input(INPUT_POST, "newsType")=="custom"){
         $postVars = array('email', 'name', 'subject', 'message'); // Form fields names
         //Validate the POST variables and add up to error message if empty
         foreach ($postVars as $postVar){
@@ -87,7 +87,7 @@ else{
             $mailer = Swift_Mailer::newInstance($transport);
             $mailer->send($message);
             
-            $json = array("status" => 1, "msg" => "You message to $name has been sent."); 
+            $json = array("status" => 1, "msg" => "Your message to $name has been sent."); 
             $dbObj->close();//Close Database Connection
             header('Content-type: application/json');
             echo json_encode($json);
@@ -100,4 +100,10 @@ else{
         }
 
     } 
+
+    if(filter_input(INPUT_POST, "sendEmails")!=NULL && filter_input(INPUT_POST, "newsType")!="custom"){
+        $json = array("status" => 1, "msg" => "News Message"); 
+        header('Content-type: application/json');
+        echo json_encode($json);
+    }
 }
