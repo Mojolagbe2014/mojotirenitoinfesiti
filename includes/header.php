@@ -15,12 +15,13 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="scroll active"><a href="#home">Home</a></li>
-                        
                         <li class="scroll"><a href="#about">About</a></li>
                         <li class="scroll"><a href="#portfolio">The Program</a></li>
                         <li class="scroll"><a href="#testimonial">Testimonals</a></li> 
-                        <li class="scroll"><a href="#news">Breaking News</a></li>
+                        <li class="scroll"><a href="#features">Breaking News</a></li>
                         <li class="scroll"><a href="#get-in-touch">Contact</a></li>
+                        <li><a href="<?php echo FACEBOOK_LINK; ?>" title="Socialize with us on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x" style="color:blue"></i></a></li>
+                        <li><a href="javascript:;" title="Subscribe to our newsletter"><i class="fa fa-user fa-2x"></i></a></li>
                     </ul>
                 </div>
             </div><!--/.container-->

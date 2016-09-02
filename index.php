@@ -14,6 +14,7 @@ $testimonialObj = new Testimonial($dbObj);
 $brochureObj = new CourseBrochure($dbObj);
 $videoObj = new Video($dbObj);
 $settingObj = new Setting($dbObj);
+$Obj = new Setting($dbObj);
 $errorArr = array(); //Array of errors
 $msg = ''; $msgStatus = '';
 
@@ -96,7 +97,7 @@ if(isset($_POST['submit'])){
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     <link href="<?php echo SITE_URL; ?>sweet-alert/sweetalert.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo SITE_URL; ?>sweet-alert/twitter.css" rel="stylesheet" type="text/css"/>
-    <style>div#second-video {padding-bottom: 46.25%;}</style>
+    <style>div#second-video {padding-bottom: 46.25%;} #features .media.service-box:first-child {margin-top: 0px;}</style>
 </head><!--/head-->
 
 <body id="home" class="homepage">
@@ -132,6 +133,8 @@ if(isset($_POST['submit'])){
             </div>
         </div>  
     </section>
+    
+    <?php include('includes/breaking-news.php'); ?>
 
     <?php include('includes/the-program.php'); ?>
 
