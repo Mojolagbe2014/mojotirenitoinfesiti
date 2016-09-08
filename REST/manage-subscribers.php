@@ -115,13 +115,12 @@ else{
         if(count($errorArr) < 1)   { 
             
             $emailAddress = COMPANY_EMAIL;
-            //$subject = "Newsletter - ".$newsObj->title;
+            $subject = "Newsletter - ".$newsObj->title;
             $transport = Swift_MailTransport::newInstance();
             $message = Swift_Message::newInstance();
             $message->setTo(array($email => $name));
-            
+            $message->setSubject($subject);
             include('../includes/email-template.php');
-            $message->setSubject("Newsletter - ".$newsObj->title);
             $message->setBody($body);
             $message->setFrom($emailAddress, WEBSITE_AUTHOR);
             $message->setContentType("text/html");
