@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2016 at 06:39 PM
+-- Generation Time: Sep 09, 2016 at 02:42 AM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin` 
+-- Table structure for table `admin`
 --
 
 DROP TABLE IF EXISTS `admin`;
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
   `date_added` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `question` (`question`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `faq`
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `news` (
 
 INSERT INTO `news` (`id`, `title`, `description`, `image`, `status`, `date_added`) VALUES
 (1, 'Nigerians students studying in Malaysia envoy', 'Al Jazeera English released its first Facebook Messenger Bot today. It took us two weeks to build it. This includes researching the current news bots, gathering requirements, develop the bot, and performing some user testing.<br />\r\nThe development team was Omran Abazid and Alaa Batayneh.<br />\r\nThe idea behind the bot is simple, in a nutshell, we deliver the right news at the right time by allowing users to choose the type of news they are interested in. Users can decide how often they want to receive breaking news articles, when to receive them, and when to stop receiving them.<br />\r\nFrom the beginning we decided to integrate Facebook&rsquo;s Instant Articles into the bot in order to keep it modular.', '484659_nigerians_students_studying_in_malaysia_envoy.jpg', 1, '2016-09-01 00:08:21'),
-(2, 'Independence anniversary of Malaysia', '<p><span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Abuja &ndash; Malaysia&rsquo;s High Commissioner to Nigeria, Amb. Datuk Lim Juay Jin, says 13,000 Nigerians are currently studying at various levels in educational institutions in Malaysia. Datuk Lim made the disclosure in an interview with the News Agency of Nigeria (NAN) in Abuja on Wednesday on the sideline of the flag hoisting ceremony to mark the 59th Independence anniversary of Malaysia.<br />\r\n<img alt="" src="http://localhost/mojotirenitoinfesiti/media/gallery/1.png" style="width: 157px; height: 103px;" /></span><br />\r\n<br />\r\n<span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Read more at: http://www.vanguardngr.com/2016/08/13000-nigerians-students-studying-malaysia-envoy/</span></p>\r\n', '762503_independence_anniversary_of_malaysia.png', 1, '2016-09-01 00:34:17');
+(2, 'Independence anniversary of Malaysia', '<p><span style="color: rgb(29, 33, 41); font-family: helvetica, arial, sans-serif; font-size: 14px; line-height: 19.32px;">Saudi Arabia is intensifying efforts to shrink the highest budget deficit among the world&rsquo;s biggest 20 economies, aiming to cancel more than $20 billion of projects and slash ministry budgets by a quarter, people familiar with the matter said.</span><br style="line-height: 20.8px;" />\r\n<br style="color: rgb(29, 33, 41); font-family: helvetica, arial, sans-serif; font-size: 14px; line-height: 19.32px;" />\r\n<span style="color: rgb(29, 33, 41); font-family: helvetica, arial, sans-serif; font-size: 14px; line-height: 19.32px;">The government is reviewing thousands of projects valued at about 260 billion riyals ($69 billion) and may cancel a third of them, three people said, asking not to be identified as the discussions are private. The measures would impact the budget for several years, according to two of the people.<br />\r\n<br />\r\nRead more:&nbsp;</span><br />\r\n<span style="line-height: 20.8px;">http://www.bloomberg.com/news/articles/2016-09-06/saudi-arabia-said-to-weigh-canceling-20-billion-of-projects</span><br />\r\n<span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px"><img alt="" src="http://localhost/mojotirenitoinfesiti/media/gallery/1.png" style="width: 157px; height: 103px;" /></span><br />\r\n<br />\r\n<span style="background-color:rgb(241, 241, 241); color:rgb(13, 13, 13); font-family:quattrocento sans,sans-serif; font-size:15px">Read more at: http://www.vanguardngr.com/2016/08/13000-nigerians-students-studying-malaysia-envoy/</span></p>\r\n', '762503_independence_anniversary_of_malaysia.png', 1, '2016-09-01 00:34:17');
 
 -- --------------------------------------------------------
 
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `slider` (
   `orders` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `slider`
